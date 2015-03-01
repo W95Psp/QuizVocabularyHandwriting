@@ -1,0 +1,49 @@
+
+<html ng-app="app">
+  <head>
+    <title>Portail-Remote</title>
+    <script src="https://cdn.socket.io/socket.io-1.1.0.js"></script>
+    <script src="/static/angular.min.js"></script>
+    <script src="/static/jquery.js"></script>
+    <script src="/static/script.js"></script>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/static/style.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0"/>
+  </head>
+  <body ng-controller="ctrl">
+    <div id="head">
+      <h1>Vocabulaire <i style="font-size: 20px;">(nombre : {{voc.length}})</i><span ng-click="mode = !mode;" style="margin-left: 20px; width: 150px; text-align: center;">Mode "{{modes[mode+0]}}"</span></h1><span ng-click="add()" ng-show="!mode">Ajouter</span><span ng-click="save()" ng-show="!mode">Sauver</span><span ng-click="del()" ng-show="!mode">Supprimer</span><span ng-click="correct()" ng-show="mode &amp;&amp; !correction">Corriger !</span><span ng-click="loadRandom()" ng-show="mode &amp;&amp; !correction">Charger au hasard !</span><span ng-click="right()" ng-show="mode &amp;&amp; correction &amp;&amp; false">Bon :-)</span><span ng-click="wrong()" ng-show="mode &amp;&amp; correction &amp;&amp; false">Mauvais :-(</span>
+    </div>
+    <div id="content" ng-show="!mode">
+      <h2>Mot :</h2>
+      <div id="guess" data-width="800px" data-height="300px" class="drawZone"></div>
+      <h2>Traduction :</h2>
+      <div id="trad" data-width="800px" data-height="300px" class="drawZone"></div>
+    </div>
+    <div id="content" ng-show="mode &amp;&amp; !correction">
+      <h2>Mot à traduire :</h2>
+      <div id="askGuess" data-width="800px" data-height="300px" class="drawZone"></div>
+      <h2>Réponse :</h2>
+      <div id="askTrad" data-width="800px" data-height="300px" class="drawZone"></div>
+    </div>
+    <div id="content" ng-show="mode &amp;&amp; correction" style="width: 100%!important;">
+      <div style="float: left; width: 640px;">
+        <h2>Mot qu'il fallait traduire :</h2><img style="width: 600px; background-color: white;" src="{{motATraduire[0]}}"/>
+        <h2>Correction :</h2><img style="width: 600px; background-color: white;" src="{{motATraduire[1]}}"/>
+      </div>
+      <div style="float: left; width: 840px;">
+        <h2>Votre réponse :</h2><img style="background-color: white;" src="{{reponseUser}}"/><img ng-click="good()" src="/static/yes.png" class="rep"/><img ng-click="bad()" src="/static/no.png" class="rep"/>
+      </div>
+    </div>
+    <div id="addPanel" ng-show="!mode">Liste des définitions existantes
+      <div class="scroll">
+        <table>
+          <tr ng-repeat="(k, word) in voc" state="{{$parent.currentDef==k}}" ng-click="$parent.currentDef = k; load(word)">
+            <td><img src="{{word[0]}}"/></td>
+            <td> <img src="{{word[1]}}"/></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

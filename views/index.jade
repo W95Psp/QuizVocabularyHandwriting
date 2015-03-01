@@ -1,0 +1,53 @@
+html(ng-app='app')
+	head
+		title Portail-Remote
+		script(src='https://cdn.socket.io/socket.io-1.1.0.js')
+		script(src='/static/angular.min.js')
+		script(src='/static/jquery.js')
+		script(src='/static/script.js')
+		link(href='http://fonts.googleapis.com/css?family=Open+Sans:300', rel='stylesheet', type='text/css')
+		link(rel="stylesheet", type="text/css", href='/static/style.css')
+		meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0")
+	body(ng-controller='ctrl')
+		div#head
+			h1 Vocabulaire 
+				i(style='font-size: 20px;') (nombre : {{voc.length}})
+				span(ng-click='mode = !mode;', style='margin-left: 20px; width: 150px; text-align: center;') Mode "{{modes[mode+0]}}"
+			span(ng-click='add()', ng-show='!mode') Ajouter
+			span(ng-click='save()', ng-show='!mode') Sauver
+			span(ng-click='del()', ng-show='!mode') Supprimer
+
+			span(ng-click='correct()', ng-show='mode && !correction') Corriger !
+			span(ng-click='loadRandom()', ng-show='mode && !correction') Charger au hasard !
+			span(ng-click='right()', ng-show='mode && correction && false') Bon :-)
+			span(ng-click='wrong()', ng-show='mode && correction && false') Mauvais :-(
+		div#content(ng-show='!mode')
+			h2 Mot :
+			div.drawZone#guess(data-width='800px', data-height='300px')
+			h2 Traduction :
+			div.drawZone#trad(data-width='800px', data-height='300px')
+		div#content(ng-show='mode && !correction')
+			h2 Mot à traduire :
+			div.drawZone#askGuess(data-width='800px', data-height='300px')
+			h2 Réponse :
+			div.drawZone#askTrad(data-width='800px', data-height='300px')
+		div#content(ng-show='mode && correction', style='width: 100%!important;')
+			div(style='float: left; width: 640px;')
+				h2 Mot qu'il fallait traduire :
+				img(style='width: 600px; background-color: white;', src='{{motATraduire[0]}}')
+				h2 Correction :
+				img(style='width: 600px; background-color: white;', src='{{motATraduire[1]}}')
+			div(style='float: left; width: 840px;')
+				h2 Votre réponse :
+				img(style='background-color: white;', src='{{reponseUser}}')
+				img.rep(ng-click='good()', src='/static/yes.png')
+				img.rep(ng-click='bad()', src='/static/no.png')
+		div#addPanel(ng-show='!mode')
+			| Liste des définitions existantes
+			div.scroll
+				table
+					tr(ng-repeat='(k, word) in voc', state='{{$parent.currentDef==k}}', ng-click='$parent.currentDef = k; load(word)')
+						td
+							img(src='{{word[0]}}')
+						td 
+							img(src='{{word[1]}}')

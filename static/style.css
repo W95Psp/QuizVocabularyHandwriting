@@ -1,0 +1,92 @@
+html body {
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+  margin: 0px;
+  padding: 0px;
+  background-color: #ecf0f1;
+}
+html body #head {
+  background-color: #3498db;
+  padding: 10px;
+  box-shadow: 0px 0px 6px rgba(0,0,0,0.4);
+}
+html body #head h1 {
+  padding: 0px;
+}
+html body #head span {
+  display: inline-block;
+  margin: 4px;
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.6);
+  font-size: 20px;
+  cursor: default;
+}
+html body #head span:hover {
+  border: 1px solid rgba(255,255,255,0.4);
+  background-color: rgba(0,0,0,0.3);
+  box-shadow: 0px 0px 6px rgba(0,0,0,0.5) inset;
+  color: #fff;
+}
+html body div.drawZone {
+  box-shadow: 0px 0px 6px rgba(0,0,0,0.4);
+  background-color: #fff;
+  position: relative;
+  display: inline-block;
+}
+html body div.drawZone > div.controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+html body #content {
+  float: left;
+  width: 830px;
+  padding: 20px;
+  padding-top: 0px;
+}
+html body #content h2 {
+  padding: 10px;
+  margin: 0px;
+}
+html body #addPanel {
+  margin: 40px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  box-shadow: 0px 0px 6px rgba(0,0,0,0.2);
+  width: 380px;
+  float: left;
+}
+html body #addPanel table {
+  border-collapse: collapse;
+}
+html body #addPanel table tr:hover {
+  background-color: #f7f7f7;
+}
+html body #addPanel table tr[state=true] {
+  background-color: #f0f0f0;
+}
+html body #addPanel table tr td {
+  margin: 3px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border: 1px solid transparent;
+}
+html body #addPanel .scroll {
+  text-align: center;
+  height: 600px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+html body #addPanel img {
+  width: 170px;
+}
+html body .rep {
+  width: 200px;
+  margin-left: 140px;
+  opacity: 0.4;
+}
+html body .rep:hover {
+  opacity: 1;
+}
