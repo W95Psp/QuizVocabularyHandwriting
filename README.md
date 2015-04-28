@@ -1,4 +1,4 @@
-# QuizVocabularyHandwrinting
+# QuizVocabularyHandwriting
 ## Why
 I'm learning Russian, and I want to train writing russian letters, and also learn vocabulary.
 
